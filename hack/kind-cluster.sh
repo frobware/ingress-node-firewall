@@ -10,7 +10,7 @@ NET_CIDR_IPV4=${NET_CIDR_IPV4:-10.244.0.0/16}
 SVC_CIDR_IPV4=${SVC_CIDR_IPV4:-10.96.0.0/16}
 NET_CIDR_IPV6=${NET_CIDR_IPV6:-fd00:10:244::/48}
 SVC_CIDR_IPV6=${SVC_CIDR_IPV6:-fd00:10:96::/112}
-cat <<EOF | kind create cluster --image kindest/node:v1.24.0 --config=- --kubeconfig=${DIR}/kubeconfig
+cat <<EOF | sudo -E $(which kind) create cluster --image kindest/node:v1.24.0 --config=- --kubeconfig=${DIR}/kubeconfig
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 networking:
