@@ -114,7 +114,7 @@ create-kind-cluster: ## Create a kind cluster.
 
 .PHONY: destroy-kind-cluster 
 destroy-kind-cluster: ## Destroy the kind cluster.
-	kind delete cluster
+	sudo -E $(shell which kind) delete cluster
 
 ifdef WHAT
 FOCUS = -ginkgo.focus "$(WHAT)"
