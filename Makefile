@@ -48,8 +48,8 @@ endif
 
 IMAGE_ORG ?= $(USER)
 # Image URL to use all building/pushing image targets
-IMG ?= quay.io/$(IMAGE_ORG)/controller
-DAEMON_IMG ?= quay.io/$(IMAGE_ORG)/ingress-node-firewall-daemon
+IMG ?= registry.int.frobware.com/$(IMAGE_ORG)/controller
+DAEMON_IMG ?= registry.int.frobware.com/$(IMAGE_ORG)/ingress-node-firewall-daemon
 # ENVTEST_K8S_VERSION refers to the version of kubebuilder assets to be downloaded by envtest binary.
 ENVTEST_K8S_VERSION = 1.24.1
 
@@ -147,7 +147,7 @@ run: manifests generate fmt vet ## Run a controller from your host.
 	go run ./main.go
 
 .PHONY: docker-build
-docker-build: test ## Build docker image with the manager.
+docker-build: # test ## Build docker image with the manager.
 	docker build -t ${IMG} .
 
 .PHONY: docker-push
@@ -364,3 +364,9 @@ podman-build-daemon: ## Build the daemon image with podman. To change location, 
 .PHONY: podman-push-daemon
 podman-push-daemon: ## Push the daemon image with docker. To change location, specify DAEMON_IMG=<image>.
 	podman push ${DAEMON_IMG}
+
+verify:
+	@echo DAEMON_IMG=$(DAEMON_IMG)
+	@echo DAEMONSET_IMAGE=$(DAEMONSET_IMAGE)
+	@echo IMG=$(IMG)
+	@echo IMAGE_TAG_BASE=$(IMAGE_TAG_BASE)
