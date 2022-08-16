@@ -182,7 +182,7 @@ deploy-kind: manifests kustomize install-cert-manager ## Deploy controller to th
 .PHONY: undeploy-kind
 undeploy-kind: ## Undeploy controller from the KinD cluster. Call with ignore-not-found=true to ignore resource not found errors during deletion.
 	$(KUSTOMIZE) build config/kind | kubectl delete --ignore-not-found=$(ignore-not-found) -f -
-	kubectl delete -f $(CERT_MANAGER_URL)
+	echo kubectl delete -f $(CERT_MANAGER_URL)
 
 .PHONY: deploy
 deploy: manifests kustomize ## Deploy controller to OCP cluster.
@@ -198,7 +198,7 @@ CERT_MANAGER_URL ?= "https://github.com/cert-manager/cert-manager/releases/downl
 .PHONY: install-cert-manager
 install-cert-manager: ## Install cert manager onto the target kubernetes cluster
 	set -e ;\
-	kubectl apply -f $(CERT_MANAGER_URL) ;\
+	curl -Ls $(CERT_MANAGER_URL) | sed 's/quay.io/registry.int.frobware.com/g' | kubectl apply -f -
 	hack/wait_for_cert_manager.sh ;\
 
 .PHONY: uninstall-cert-manager
