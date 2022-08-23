@@ -239,13 +239,13 @@ spec:
                 - /manager
                 env:
                 - name: DAEMONSET_IMAGE
-                  value: quay.io/mmahmoud/ingress-node-firewall-daemon:latest
+                  value: localhost:5001/aim/ingress-node-firewall-daemon:latest
                 - name: DAEMONSET_NAMESPACE
                   valueFrom:
                     fieldRef:
                       fieldPath: metadata.namespace
                 - name: KUBE_RBAC_PROXY_IMAGE
-                  value: quay.io/openshift/origin-kube-rbac-proxy:latest
+                  value: localhost:5001/openshift/origin-kube-rbac-proxy:latest
                 image: quay.io/mmahmoud/controller:latest
                 livenessProbe:
                   httpGet:
@@ -309,7 +309,7 @@ spec:
                     --upstream=http://127.0.0.1:39300 / \
                     --tls-private-key-file=${TLS_PK} \
                     --tls-cert-file=${TLS_CERT}
-                image: quay.io/openshift/origin-kube-rbac-proxy:latest
+                image: localhost:5001/openshift/origin-kube-rbac-proxy:latest
                 name: kube-rbac-proxy
                 ports:
                 - containerPort: 9300

@@ -58,7 +58,7 @@ spec:
             cpu: 10m
             memory: 64Mi
       - name: kube-rbac-proxy
-        image: quay.io/openshift/origin-kube-rbac-proxy:latest
+        image: localhost:5001/openshift/origin-kube-rbac-proxy:latest
         command:
           - /bin/bash
           - -c
