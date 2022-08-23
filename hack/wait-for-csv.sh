@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /usr/bin/env bash
 
 VERSION="v${VERSION:-"0.0.1"}"
 CSV_NAME="ingress-node-firewall.${VERSION}"

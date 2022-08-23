@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /usr/bin/env bash
 MANIFEST_FILE="daemonset.yaml"
 MANIFEST_PATH="bindata/manifests/daemon"
 
